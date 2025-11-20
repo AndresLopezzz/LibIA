@@ -1,0 +1,154 @@
+# .gitignore - Afinado para el frontend (Vite + React) con subproyecto Tauri/Rust
+# Mantén las lockfiles (útiles para reproducibilidad). Si usas Bun/Yarn/PNPM/NPM,
+# asegúrate de commitearlas: bun.lock, yarn.lock, pnpm-lock.yaml, package-lock.json
+# NOTA: las entradas con "!" son negaciones para asegurarnos que no se ignoran accidentalmente.
+
+# -------------------------
+# Lockfiles (no ignorar)
+# -------------------------
+!package-lock.json
+!yarn.lock
+!pnpm-lock.yaml
+!bun.lock
+
+# -------------------------
+# Logs
+# -------------------------
+# npm / yarn / pnpm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+debug.log
+logs/
+*.log
+
+# -------------------------
+# Node / Package manager / Caches
+# -------------------------
+node_modules/
+.pnpm-store/                # pnpm store (si lo tienes local)
+.yarn/cache/                # Yarn 2+ cache
+.yarn/unplugged/
+.yarn/build-state.yml
+.npm/
+npmcache/
+.npmrc.node-version
+
+# Vite & other bundlers caches
+.vite/
+.vite/deps/
+.cache/
+.parcel-cache/
+
+# -------------------------
+# Build outputs / Dist
+# -------------------------
+/dist/
+/dist-ssr/
+/build/
+/out/
+public/build/
+/.serve/
+
+# -------------------------
+# TypeScript / Compilado
+# -------------------------
+*.tsbuildinfo
+lib/
+esm/
+cjs/
+
+# -------------------------
+# Environment and secrets
+# -------------------------
+# Ignora todas las vars de entorno locales y secretos,
+# pero mantén plantilla de ejemplo
+.env
+.env.*.local
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+!.env.example
+
+# -------------------------
+# Test / Coverage
+# -------------------------
+coverage/
+coverage-*
+.nyc_output/
+test-results.xml
+jest-results.*.json
+cypress/videos/
+cypress/screenshots/
+
+# -------------------------
+# Editor / IDEs
+# -------------------------
+# Ignorar settings locales pero mantener extensión/ajustes compartidos
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.iml
+
+# JetBrains / VS / Sublime swap & settings
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# -------------------------
+# OS generated files
+# -------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# -------------------------
+# Temporary files / swap / backups
+# -------------------------
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# -------------------------
+# Packaging / artifacts
+# -------------------------
+*.tgz
+*.zip
+
+# -------------------------
+# WebAssembly / Native / Tauri / Rust helper artifacts
+# (subproject src-tauri has its own .gitignore; duplicating here is OK)
+# -------------------------
+src-tauri/target/
+src-tauri/gen/
+src-tauri/*.log
+wasm/
+wasm-node/
+
+# -------------------------
+# Misc & tooling
+# -------------------------
+# caches and temporary data for various tools
+.eslintcache
+.cache-loader/
+tsconfig.tsbuildinfo
+.storybook/out
+.rush/
+coverage/
+.vscode-test/
+
+# -------------------------
+# Not recommended to ignore but added here for clarity:
+# - package.json, tsconfig.json, vite.config.*, README.md remain tracked
+# -------------------------

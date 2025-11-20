@@ -1,0 +1,163 @@
+# Root .gitignore - Monorepo (Node + Tauri/Rust)
+# Ignora node_modules a nivel raíz y en subcarpetas, artefactos de compilación,
+# caches, logs, archivos temporales y archivos específicos de Tauri/Rust.
+
+# -------------------------
+# Node / Package managers
+# -------------------------
+# Ignore node_modules everywhere (root + nested)
+node_modules/
+**/node_modules/
+
+# Common package manager caches (pnpm/yarn/bun)
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.npm/
+npmcache/
+.npmrc.node-version
+.bun/
+
+# Don't ignore lockfiles (useful for reproducibility)
+!package-lock.json
+!yarn.lock
+!pnpm-lock.yaml
+!bun.lock
+
+# -------------------------
+# Logs
+# -------------------------
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+debug.log
+logs/
+*.log
+
+# -------------------------
+# Bundlers / Caches
+# -------------------------
+.vite/
+.vite/deps/
+.cache/
+.parcel-cache/
+.eslintcache
+.cache-loader/
+
+# -------------------------
+# Build outputs / Dist
+# -------------------------
+/dist/
+/dist-ssr/
+/build/
+/out/
+public/build/
+/.serve/
+
+# -------------------------
+# TypeScript / Compiled
+# -------------------------
+*.tsbuildinfo
+lib/
+esm/
+cjs/
+
+# -------------------------
+# Environment and secrets
+# -------------------------
+# Ignore env files locally but keep an example template
+.env
+.env.*.local
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+!.env.example
+
+# -------------------------
+# Tests / Coverage
+# -------------------------
+coverage/
+coverage-*
+.nyc_output/
+test-results.xml
+jest-results.*.json
+cypress/videos/
+cypress/screenshots/
+
+# -------------------------
+# Editor / IDEs
+# -------------------------
+# Ignore editor settings but allow shared settings if explicitly committed in subprojects
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.iml
+# JetBrains & Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# -------------------------
+# OS generated files
+# -------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# -------------------------
+# Temporary files / swap / backups
+# -------------------------
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# -------------------------
+# Packaging / artifacts
+# -------------------------
+*.tgz
+*.zip
+
+# -------------------------
+# Tauri / Rust (subproject artifacts)
+# -------------------------
+# Ignore Rust target directories (applies to all crates / workspaces)
+target/
+**/target/
+# Tauri-specific generated artifacts
+src-tauri/target/
+src-tauri/gen/
+src-tauri/*.log
+
+# -------------------------
+# Wasm and native helper artifacts
+# -------------------------
+wasm/
+wasm-node/
+
+# -------------------------
+# Misc & tooling
+# -------------------------
+.rush/
+.vscode-test/
+.storybook/out
+
+# -------------------------
+# Additional tips in case node_modules still appear:
+# 1) If node_modules were already added to the repo previously, untrack them:
+#    git rm -r --cached node_modules
+#    git rm -r --cached app/node_modules
+#    git commit -m "Remove node_modules from tracking"
+# 2) If some nested path is still tracked, run:
+#    git rm -r --cached path/to/node_modules
+# -------------------------
