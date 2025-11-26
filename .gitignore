@@ -152,6 +152,9 @@ wasm-node/
 .vscode-test/
 .storybook/out
 
+# Archivos de documentación locales / planes personales
+plan_30_dias_pdf_ia.backup.md
+
 # -------------------------
 # Additional tips in case node_modules still appear:
 # 1) If node_modules were already added to the repo previously, untrack them:
