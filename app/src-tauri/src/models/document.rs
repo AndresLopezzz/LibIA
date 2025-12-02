@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 
 /// Representa un documento PDF cargado en el sistema
-/// 
+///
 /// Este struct almacena la información básica de un documento:
 /// - Identificador único
 /// - Nombre del archivo
@@ -13,28 +13,29 @@ use std::time::SystemTime;
 pub struct Document {
     /// ID único del documento (usualmente UUID o hash del archivo)
     pub id: String,
-    
+
     /// Nombre original del archivo PDF
     pub name: String,
-    
+
     /// Ruta completa del archivo en el sistema
     pub file_path: String,
-    
+
     /// Número de páginas del documento
     pub page_count: usize,
-    
+
     /// Fecha de carga en formato timestamp Unix
     pub created_at: u64,
-    
+
     /// Indica si el documento ya fue indexado (tiene embeddings generados)
     pub is_indexed: bool,
 }
 
 impl Document {
     /// Crea un nuevo documento con la fecha actual
-    /// 
+    ///
     /// # Ejemplo
     /// ```
+    /// # use frontend_lib::models::Document;
     /// let doc = Document::new(
     ///     "doc-123".to_string(),
     ///     "mi_documento.pdf".to_string(),
@@ -47,7 +48,7 @@ impl Document {
             .duration_since(SystemTime::UNIX_EPOCH)
             .unwrap()
             .as_secs();
-        
+
         Self {
             id,
             name,
@@ -57,7 +58,7 @@ impl Document {
             is_indexed: false,
         }
     }
-    
+
     /// Marca el documento como indexado
     pub fn mark_as_indexed(&mut self) {
         self.is_indexed = true;
@@ -77,7 +78,7 @@ mod tests {
             "/path/to/test.pdf".to_string(),
             5,
         );
-        
+
         assert_eq!(doc.id, "test-id");
         assert_eq!(doc.name, "test.pdf");
         assert_eq!(doc.page_count, 5);
@@ -93,7 +94,7 @@ mod tests {
             "/path/to/test.pdf".to_string(),
             5,
         );
-        
+
         assert!(!doc.is_indexed);
         doc.mark_as_indexed();
         assert!(doc.is_indexed);
@@ -107,16 +108,16 @@ mod tests {
             "/path/to/test.pdf".to_string(),
             5,
         );
-        
+
         // Serializar a JSON
         let json = serde_json::to_string(&doc).expect("Debe serializar correctamente");
         assert!(json.contains("test-id"));
         assert!(json.contains("test.pdf"));
-        
+
         // Deserializar desde JSON
-        let doc_deserialized: Document = serde_json::from_str(&json)
-            .expect("Debe deserializar correctamente");
-        
+        let doc_deserialized: Document =
+            serde_json::from_str(&json).expect("Debe deserializar correctamente");
+
         assert_eq!(doc.id, doc_deserialized.id);
         assert_eq!(doc.name, doc_deserialized.name);
         assert_eq!(doc.page_count, doc_deserialized.page_count);
@@ -130,11 +131,11 @@ mod tests {
             "/ruta/documento.pdf".to_string(),
             10,
         );
-        
+
         // Serializar y deserializar
         let json = serde_json::to_string(&original).unwrap();
         let restored: Document = serde_json::from_str(&json).unwrap();
-        
+
         // Verificar que todos los campos coinciden
         assert_eq!(original.id, restored.id);
         assert_eq!(original.name, restored.name);
@@ -144,4 +145,3 @@ mod tests {
         assert_eq!(original.is_indexed, restored.is_indexed);
     }
 }
-
